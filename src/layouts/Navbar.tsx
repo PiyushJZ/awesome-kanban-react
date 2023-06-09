@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   getStorageItem,
   deleteStorageItem,
   setStorageItem,
-} from '../utils/storage';
+} from '@/utils/storage';
+import { Avatar, Dropdown } from '@/components';
 
 export default () => {
   const navigate = useNavigate();
-  const token = '';
+  const location = useLocation();
+  console.log(location);
+  const token = 'fdasdf';
   const [darkMode, setDarkMode] = useState(
     getStorageItem('darkMode') ? true : false
   );
@@ -36,20 +39,23 @@ export default () => {
           </svg>
         </Link>
         {/* Links */}
-        <ul className={`flex h-7 grow`}>
-          <li className={`mx-10 capitalize text-black dark:text-white`}>
-            <Link to='/'>home</Link>
-          </li>
-          <li className={`mx-10 capitalize text-black dark:text-white`}>
-            <Link to='features'>features</Link>
-          </li>
-          <li className={`mx-10 capitalize text-black dark:text-white`}>
-            <Link to='pricing'>pricing</Link>
-          </li>
-          <li className={`mx-10 capitalize text-black dark:text-white`}>
-            <Link to='about-us'>about us</Link>
-          </li>
-        </ul>
+        {(!location.pathname.includes('user') && (
+          <ul className={`flex h-7 grow`}>
+            <li className={`mx-10 capitalize text-black dark:text-white`}>
+              <Link to='/'>home</Link>
+            </li>
+            <li className={`mx-10 capitalize text-black dark:text-white`}>
+              <Link to='features'>features</Link>
+            </li>
+            <li className={`mx-10 capitalize text-black dark:text-white`}>
+              <Link to='pricing'>pricing</Link>
+            </li>
+            <li className={`mx-10 capitalize text-black dark:text-white`}>
+              <Link to='about-us'>about us</Link>
+            </li>
+          </ul>
+        )) ||
+          null}
         {/* Theme Switching Button */}
         <div className='h-7'>
           <button
@@ -130,28 +136,39 @@ export default () => {
           )) ||
             null}
           {(token && (
-            <li className={`ml-2`}>
-              <button
-                onClick={() => navigate('user/dashboard')}
-                className={`flex w-32 items-center justify-between bg-primary p-2 capitalize`}
-              >
-                dashboard{' '}
-                <svg
-                  width='15'
-                  height='15'
-                  viewBox='0 0 15 15'
-                  fill='none'
-                  xmlns='http://www.w3.org/2000/svg'
-                >
-                  <path
-                    d='M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z'
-                    fill='currentColor'
-                    fillRule='evenodd'
-                    clipRule='evenodd'
-                  ></path>
-                </svg>
-              </button>
-            </li>
+            <>
+              {(location.pathname.includes('user') && (
+                <Dropdown label='Profile options'>
+                  <Avatar />
+                </Dropdown>
+              )) ||
+                null}
+              {(!location.pathname.includes('user') && (
+                <li className={`ml-2`}>
+                  <button
+                    onClick={() => navigate('user/dashboard')}
+                    className={`flex w-32 items-center justify-between bg-primary p-2 capitalize`}
+                  >
+                    dashboard{' '}
+                    <svg
+                      width='15'
+                      height='15'
+                      viewBox='0 0 15 15'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        d='M8.14645 3.14645C8.34171 2.95118 8.65829 2.95118 8.85355 3.14645L12.8536 7.14645C13.0488 7.34171 13.0488 7.65829 12.8536 7.85355L8.85355 11.8536C8.65829 12.0488 8.34171 12.0488 8.14645 11.8536C7.95118 11.6583 7.95118 11.3417 8.14645 11.1464L11.2929 8H2.5C2.22386 8 2 7.77614 2 7.5C2 7.22386 2.22386 7 2.5 7H11.2929L8.14645 3.85355C7.95118 3.65829 7.95118 3.34171 8.14645 3.14645Z'
+                        fill='currentColor'
+                        fillRule='evenodd'
+                        clipRule='evenodd'
+                      ></path>
+                    </svg>
+                  </button>
+                </li>
+              )) ||
+                null}
+            </>
           )) ||
             null}
         </ul>

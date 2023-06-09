@@ -1,3 +1,17 @@
+const {
+  violet,
+  red,
+  plum,
+  purple,
+  pink,
+  blue,
+  teal,
+  cyan,
+  slate,
+  mauve,
+  blackA,
+  whiteA,
+} = require('@radix-ui/colors');
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -8,6 +22,33 @@ export default {
         pg: 'calc(100vh - 5rem)',
       },
       boxShadow: ['dark'],
+      keyframes: {
+        slideDownAndFade: {
+          from: { opacity: 0, transform: 'translateY(-2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideLeftAndFade: {
+          from: { opacity: 0, transform: 'translateX(2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+        slideUpAndFade: {
+          from: { opacity: 0, transform: 'translateY(2px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
+        },
+        slideRightAndFade: {
+          from: { opacity: 0, transform: 'translateX(-2px)' },
+          to: { opacity: 1, transform: 'translateX(0)' },
+        },
+      },
+      animation: {
+        slideDownAndFade:
+          'slideDownAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideLeftAndFade:
+          'slideLeftAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideUpAndFade: 'slideUpAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+        slideRightAndFade:
+          'slideRightAndFade 400ms cubic-bezier(0.16, 1, 0.3, 1)',
+      },
     },
     colors: {
       transparent: 'transparent',
@@ -17,9 +58,20 @@ export default {
       accent: '#FFCD4F',
       muted: '#001111',
       highlight: '#FF00CC',
-      gray: '#999999',
       black: '#000000',
       white: '#ffffff',
+      ...violet,
+      ...red,
+      ...plum,
+      ...purple,
+      ...pink,
+      ...blue,
+      ...teal,
+      ...cyan,
+      ...slate,
+      ...mauve,
+      ...blackA,
+      ...whiteA,
     },
     boxShadow: {
       sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
