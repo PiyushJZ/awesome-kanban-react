@@ -1,9 +1,7 @@
+import { Page } from '../layouts';
+
 const Dashboard = () => {
-  return (
-    <div className='h-pg bg-white uppercase text-black dark:bg-black dark:text-white'>
-      dashboard
-    </div>
-  );
+  return <Page>dashboard</Page>;
 };
 
 export default Dashboard;

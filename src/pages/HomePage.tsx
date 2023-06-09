@@ -1,8 +1,10 @@
+import { Page } from '../layouts';
+
 const HomePage = () => {
   return (
-    <div className='h-pg bg-white text-3xl uppercase text-black dark:bg-black dark:text-white'>
-      home page
-    </div>
+    <Page>
+      <div className='text-3xl uppercase'>home page</div>
+    </Page>
   );
 };
 

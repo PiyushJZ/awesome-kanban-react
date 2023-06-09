@@ -1,9 +1,7 @@
+import { Page } from '../layouts';
+
 const Signup = () => {
-  return (
-    <div className='h-pg bg-white uppercase text-black dark:bg-black dark:text-white'>
-      Signup Page
-    </div>
-  );
+  return <Page>Signup Page</Page>;
 };
 
 export default Signup;

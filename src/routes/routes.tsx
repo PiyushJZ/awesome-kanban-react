@@ -1,5 +1,13 @@
 import { RouteObject } from 'react-router-dom';
-import { HomePage, Login, Signup, Dashboard } from '../pages';
+import {
+  HomePage,
+  Login,
+  Signup,
+  Dashboard,
+  Features,
+  Pricing,
+  AboutUs,
+} from '../pages';
 import { Navbar } from '../layouts';
 import ProtectedRoute from './ProtectedRoute';
 import ReverseRoute from './ReverseRoute';
@@ -12,6 +20,18 @@ const routes: RouteObject[] = [
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: 'features',
+        element: <Features />,
+      },
+      {
+        path: 'pricing',
+        element: <Pricing />,
+      },
+      {
+        path: 'about-us',
+        element: <AboutUs />,
       },
       {
         path: 'account',
