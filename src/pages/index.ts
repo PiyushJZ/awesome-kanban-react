@@ -5,3 +5,5 @@ export { default as Dashboard } from './Dashboard';
 export { default as Features } from './Features';
 export { default as Pricing } from './Pricing';
 export { default as AboutUs } from './AboutUs';
+export { default as Profile } from './Profile';
+export { default as Settings } from './Settings';

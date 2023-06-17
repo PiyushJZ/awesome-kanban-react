@@ -1,16 +1,36 @@
+import { lazy, Suspense } from 'react';
 import { RouteObject } from 'react-router-dom';
-import {
-  HomePage,
-  Login,
-  Signup,
-  Dashboard,
-  Features,
-  Pricing,
-  AboutUs,
-} from '../pages';
-import { Navbar } from '../layouts';
+import { Navbar } from '@/layouts';
 import ProtectedRoute from './ProtectedRoute';
 import ReverseRoute from './ReverseRoute';
+
+const HomePage = lazy(() =>
+  import('@/pages').then(module => ({ default: module.HomePage }))
+);
+const Login = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Login }))
+);
+const Signup = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Signup }))
+);
+const Dashboard = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Dashboard }))
+);
+const Features = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Features }))
+);
+const Pricing = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Pricing }))
+);
+const AboutUs = lazy(() =>
+  import('@/pages').then(module => ({ default: module.AboutUs }))
+);
+const Profile = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Profile }))
+);
+const Settings = lazy(() =>
+  import('@/pages').then(module => ({ default: module.Settings }))
+);
 
 const routes: RouteObject[] = [
   {
@@ -19,19 +39,35 @@ const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: (
+          <Suspense fallback={<>Wait...</>}>
+            <HomePage />
+          </Suspense>
+        ),
       },
       {
         path: 'features',
-        element: <Features />,
+        element: (
+          <Suspense fallback={<>Wait...</>}>
+            <Features />
+          </Suspense>
+        ),
       },
       {
         path: 'pricing',
-        element: <Pricing />,
+        element: (
+          <Suspense fallback={<>Wait...</>}>
+            <Pricing />
+          </Suspense>
+        ),
       },
       {
         path: 'about-us',
-        element: <AboutUs />,
+        element: (
+          <Suspense fallback={<>Wait...</>}>
+            <AboutUs />
+          </Suspense>
+        ),
       },
       {
         path: 'account',
@@ -39,11 +75,19 @@ const routes: RouteObject[] = [
         children: [
           {
             path: 'login',
-            element: <Login />,
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Login />
+              </Suspense>
+            ),
           },
           {
             path: 'signup',
-            element: <Signup />,
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Signup />
+              </Suspense>
+            ),
           },
         ],
       },
@@ -53,16 +97,30 @@ const routes: RouteObject[] = [
         children: [
           {
             path: 'dashboard',
-            element: <Dashboard />,
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Dashboard />
+              </Suspense>
+            ),
           },
           {
             path: 'project',
           },
           {
             path: 'settings',
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Settings />
+              </Suspense>
+            ),
           },
           {
             path: 'profile',
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Profile />
+              </Suspense>
+            ),
           },
           {
             path: 'dashboard',
