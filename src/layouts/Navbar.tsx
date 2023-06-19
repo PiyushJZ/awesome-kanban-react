@@ -1,58 +1,168 @@
 import { useState } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
+import * as Separator from '@radix-ui/react-separator';
 import {
   getStorageItem,
   deleteStorageItem,
   setStorageItem,
 } from '@/utils/storage';
 import { Avatar, Dropdown, NavigationButton } from '@/components';
+import IconButton from '@/components/IconButton';
 
 export default () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const token = 'fsdf';
+  const token = '';
   const [darkMode, setDarkMode] = useState(
     getStorageItem('darkMode') ? true : false
   );
+  const [open, setOpen] = useState(false);
 
   return (
     <div className={`${darkMode ? 'dark' : ''}`}>
       <header
-        className={`flex items-center justify-between bg-white p-2 drop-shadow-lg dark:bg-black dark:shadow-dark dark:drop-shadow-lg`}
+        className={`flex ${
+          open ? 'items-start' : 'items-center'
+        } justify-between bg-white p-2 drop-shadow-lg dark:bg-black dark:shadow-dark dark:drop-shadow-lg md:items-center`}
       >
         {/* Logo */}
-        <Link to='/' className={`p-1`}>
+        <Link
+          to={location.pathname.includes('user') ? 'user' : '/'}
+          className={`p-1`}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke={darkMode ? 'white' : 'black'}
+            viewBox='0 0 32 32'
+            id='feedback'
             className='h-14 w-14'
           >
             <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122'
-            />
+              fill={darkMode ? 'white' : 'black'}
+              d='M6 10c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm0-7C4.3 3 3 4.3 3 6s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z'
+            ></path>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M6 8c-.5 0-1-.2-1.4-.6-.2-.2-.2-.5 0-.7s.5-.2.7 0c.4.4 1 .4 1.4 0 .2-.2.5-.2.7 0s.2.5 0 .7C7 7.8 6.5 8 6 8z'
+            ></path>
+            <circle
+              cx='4.8'
+              cy='5'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <circle
+              cx='7.3'
+              cy='5'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M6 20c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm0-7c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z'
+            ></path>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M7.1 17.5H4.9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5H7c.3 0 .5.2.5.5s-.2.5-.4.5z'
+            ></path>
+            <circle
+              cx='4.8'
+              cy='15'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <circle
+              cx='7.3'
+              cy='15'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M6 30c-2.2 0-4-1.8-4-4s1.8-4 4-4 4 1.8 4 4-1.8 4-4 4zm0-7c-1.7 0-3 1.3-3 3s1.3 3 3 3 3-1.3 3-3-1.3-3-3-3z'
+            ></path>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M7.1 28c-.1 0-.3 0-.4-.1-.4-.4-1-.4-1.4 0-.2.2-.5.2-.7 0s-.2-.5 0-.7c.7-.7 2.1-.7 2.8 0 .2.2.2.5 0 .7-.1.1-.2.1-.3.1z'
+            ></path>
+            <circle
+              cx='4.8'
+              cy='25'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <circle
+              cx='7.3'
+              cy='25'
+              r='.5'
+              fill={darkMode ? 'white' : 'black'}
+            ></circle>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M17.5 9h-5c-.3 0-.5-.2-.5-.5v-5c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v5c0 .3-.2.5-.5.5zM13 8h4V4h-4v4z'
+            ></path>
+            <path
+              fill={darkMode ? 'white' : 'black'}
+              d='M15.4 7.5c-.1 0-.3 0-.4-.1L13.6 6c-.2-.2-.2-.5 0-.7s.5-.2.7 0l1.1 1.1 3.2-3.2c.2-.2.5-.2.7 0s.2.5 0 .7l-3.5 3.5c-.1 0-.2.1-.4.1zM17.5 19h-5c-.3 0-.5-.2-.5-.5v-5c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v5c0 .3-.2.5-.5.5zM13 18h4v-4h-4v4zm4.5 11h-5c-.3 0-.5-.2-.5-.5v-5c0-.3.2-.5.5-.5h5c.3 0 .5.2.5.5v5c0 .3-.2.5-.5.5zM13 28h4v-4h-4v4zm16.5-3h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm-3 2h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h6c.3 0 .5.2.5.5s-.2.5-.5.5zm3-12h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm-3 2h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h6c.3 0 .5.2.5.5s-.2.5-.5.5zm3-12h-9c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h9c.3 0 .5.2.5.5s-.2.5-.5.5zm-3 2h-6c-.3 0-.5-.2-.5-.5s.2-.5.5-.5h6c.3 0 .5.2.5.5s-.2.5-.5.5z'
+            ></path>
           </svg>
         </Link>
 
         {/* Links */}
         {(!location.pathname.includes('user') && (
-          <ul className={`flex h-7 grow`}>
+          <ul
+            className={`${
+              open ? 'mt-16 flex flex-col space-y-4' : 'hidden'
+            } md:mt-0 md:flex md:h-7 md:grow md:flex-row md:space-y-0`}
+          >
             <li className={`mx-10 capitalize text-black dark:text-white`}>
-              <Link to='/'>home</Link>
+              <Link to='/' onClick={() => setOpen(false)}>
+                home
+              </Link>
             </li>
             <li className={`mx-10 capitalize text-black dark:text-white`}>
-              <Link to='features'>features</Link>
+              <Link to='features' onClick={() => setOpen(false)}>
+                features
+              </Link>
             </li>
             <li className={`mx-10 capitalize text-black dark:text-white`}>
-              <Link to='pricing'>pricing</Link>
+              <Link to='pricing' onClick={() => setOpen(false)}>
+                pricing
+              </Link>
             </li>
-            <li className={`mx-10 capitalize text-black dark:text-white`}>
-              <Link to='about-us'>about us</Link>
-            </li>
+            <Separator.Root
+              decorative
+              className='bg-black data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full dark:bg-white md:hidden '
+            />
+            {(!token && (
+              <li
+                className={`mx-10 font-bold capitalize text-black hover:text-primary dark:text-primary md:hidden`}
+              >
+                <Link to='account/login' onClick={() => setOpen(false)}>
+                  login
+                </Link>
+              </li>
+            )) ||
+              null}
+            {(!token && (
+              <li
+                className={`mx-10 font-bold capitalize text-black hover:text-primary dark:text-primary md:hidden`}
+              >
+                <Link to='account/signup' onClick={() => setOpen(false)}>
+                  signup
+                </Link>
+              </li>
+            )) ||
+              null}
+            {(token && !location.pathname.includes('user') && (
+              <li
+                className={`mx-10 font-bold capitalize text-black hover:text-primary dark:text-primary md:hidden`}
+              >
+                <Link to='user/dashboard' onClick={() => setOpen(false)}>
+                  dashboard
+                </Link>
+              </li>
+            )) ||
+              null}
           </ul>
         )) ||
           null}
@@ -100,8 +210,15 @@ export default () => {
               )}
             </button>
           </div>
+
           {/* Action to login/signup or go to dashboard */}
-          <ul className={`flex h-7 items-center px-4`}>
+          <ul
+            className={`${
+              location.pathname.includes('user')
+                ? 'flex items-center'
+                : 'hidden'
+            } h-7 px-4 md:flex md:items-center`}
+          >
             {(!token && (
               <Link to='account/login' className='mx-2'>
                 <li className={`dark: capitalize text-black dark:text-primary`}>
@@ -173,6 +290,45 @@ export default () => {
             )) ||
               null}
           </ul>
+          <div
+            className={`${
+              location.pathname.includes('user') ? 'hidden' : 'ml-4'
+            } md:hidden`}
+          >
+            <IconButton current={open} action={setOpen}>
+              {open ? (
+                <svg
+                  width='28'
+                  height='28'
+                  viewBox='0 0 15 15'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    d='M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z'
+                    fill={darkMode ? 'white' : 'black'}
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                  ></path>
+                </svg>
+              ) : (
+                <svg
+                  width='28'
+                  height='28'
+                  viewBox='0 0 15 15'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    d='M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z'
+                    fill={darkMode ? 'white' : 'black'}
+                    fillRule='evenodd'
+                    clipRule='evenodd'
+                  ></path>
+                </svg>
+              )}
+            </IconButton>
+          </div>
         </div>
       </header>
       {/* Outlet for the all the pages */}

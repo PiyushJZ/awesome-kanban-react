@@ -96,6 +96,14 @@ const routes: RouteObject[] = [
         element: <ProtectedRoute />,
         children: [
           {
+            index: true,
+            element: (
+              <Suspense fallback={<>Wait...</>}>
+                <Dashboard />
+              </Suspense>
+            ),
+          },
+          {
             path: 'dashboard',
             element: (
               <Suspense fallback={<>Wait...</>}>

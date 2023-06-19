@@ -1,11 +1,14 @@
+import { ReactNode } from 'react';
+
 type IconButtonProps = {
-  children: string;
+  children: ReactNode;
   action: Function;
+  current: boolean;
 };
 
-const IconButton = ({ children, action }: IconButtonProps) => {
+const IconButton = ({ children, action, current }: IconButtonProps) => {
   return (
-    <button className='h-7 w-7 rounded-full' onClick={() => action}>
+    <button className='h-7 w-7 rounded-full' onClick={() => action(!current)}>
       {children}
     </button>
   );
